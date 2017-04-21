@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.HomepageMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.Homepage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="isUse" jdbcType="BIT" property="isuse" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, picture, isUse
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_homepage
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_homepage
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.Homepage">
+    insert into t_homepage (id, picture, isUse
+      )
+    values (#{id,jdbcType=BIGINT}, #{picture,jdbcType=VARCHAR}, #{isuse,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.Homepage">
+    insert into t_homepage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="isuse != null">
+        isUse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null">
+        #{isuse,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.Homepage">
+    update t_homepage
+    <set>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null">
+        isUse = #{isuse,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.Homepage">
+    update t_homepage
+    set picture = #{picture,jdbcType=VARCHAR},
+      isUse = #{isuse,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

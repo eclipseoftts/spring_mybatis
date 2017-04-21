@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.Goods_specialMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.Goods_special">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goodsId" jdbcType="BIGINT" property="goodsid" />
+    <result column="special" jdbcType="DOUBLE" property="special" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goodsId, special
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_special
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_goods_special
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.Goods_special">
+    insert into t_goods_special (id, goodsId, special
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsid,jdbcType=BIGINT}, #{special,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.Goods_special">
+    insert into t_goods_special
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="special != null">
+        special,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="special != null">
+        #{special,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.Goods_special">
+    update t_goods_special
+    <set>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="special != null">
+        special = #{special,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.Goods_special">
+    update t_goods_special
+    set goodsId = #{goodsid,jdbcType=BIGINT},
+      special = #{special,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

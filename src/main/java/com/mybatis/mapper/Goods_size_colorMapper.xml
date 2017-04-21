@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.Goods_size_colorMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.Goods_size_color">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="lenghtSize" jdbcType="INTEGER" property="lenghtsize" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="goodsId" jdbcType="BIGINT" property="goodsid" />
+    <result column="widthSize" jdbcType="INTEGER" property="widthsize" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, lenghtSize, color, goodsId, widthSize
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_size_color
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_goods_size_color
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.Goods_size_color">
+    insert into t_goods_size_color (id, lenghtSize, color, 
+      goodsId, widthSize)
+    values (#{id,jdbcType=BIGINT}, #{lenghtsize,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{goodsid,jdbcType=BIGINT}, #{widthsize,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.Goods_size_color">
+    insert into t_goods_size_color
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="lenghtsize != null">
+        lenghtSize,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="goodsid != null">
+        goodsId,
+      </if>
+      <if test="widthsize != null">
+        widthSize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lenghtsize != null">
+        #{lenghtsize,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="widthsize != null">
+        #{widthsize,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.Goods_size_color">
+    update t_goods_size_color
+    <set>
+      <if test="lenghtsize != null">
+        lenghtSize = #{lenghtsize,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsid != null">
+        goodsId = #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="widthsize != null">
+        widthSize = #{widthsize,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.Goods_size_color">
+    update t_goods_size_color
+    set lenghtSize = #{lenghtsize,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      goodsId = #{goodsid,jdbcType=BIGINT},
+      widthSize = #{widthsize,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.model.Goods">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="typeid" jdbcType="VARCHAR" property="typeid" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="producer" jdbcType="VARCHAR" property="producer" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="totalNumber" jdbcType="INTEGER" property="totalnumber" />
+    <result column="remaining" jdbcType="INTEGER" property="remaining" />
+    <result column="isSpecial" jdbcType="INTEGER" property="isspecial" />
+    <result column="inDate" jdbcType="DATE" property="indate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, typeid, price, producer, photo, totalNumber, remaining, isSpecial, inDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_goods
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mybatis.model.Goods">
+    insert into t_goods (id, typeid, price, 
+      producer, photo, totalNumber, 
+      remaining, isSpecial, inDate
+      )
+    values (#{id,jdbcType=BIGINT}, #{typeid,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{producer,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{totalnumber,jdbcType=INTEGER}, 
+      #{remaining,jdbcType=INTEGER}, #{isspecial,jdbcType=INTEGER}, #{indate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mybatis.model.Goods">
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeid != null">
+        typeid,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="producer != null">
+        producer,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="totalnumber != null">
+        totalNumber,
+      </if>
+      <if test="remaining != null">
+        remaining,
+      </if>
+      <if test="isspecial != null">
+        isSpecial,
+      </if>
+      <if test="indate != null">
+        inDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="producer != null">
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnumber != null">
+        #{totalnumber,jdbcType=INTEGER},
+      </if>
+      <if test="remaining != null">
+        #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="isspecial != null">
+        #{isspecial,jdbcType=INTEGER},
+      </if>
+      <if test="indate != null">
+        #{indate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mybatis.model.Goods">
+    update t_goods
+    <set>
+      <if test="typeid != null">
+        typeid = #{typeid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="producer != null">
+        producer = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnumber != null">
+        totalNumber = #{totalnumber,jdbcType=INTEGER},
+      </if>
+      <if test="remaining != null">
+        remaining = #{remaining,jdbcType=INTEGER},
+      </if>
+      <if test="isspecial != null">
+        isSpecial = #{isspecial,jdbcType=INTEGER},
+      </if>
+      <if test="indate != null">
+        inDate = #{indate,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mybatis.model.Goods">
+    update t_goods
+    set typeid = #{typeid,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      producer = #{producer,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      totalNumber = #{totalnumber,jdbcType=INTEGER},
+      remaining = #{remaining,jdbcType=INTEGER},
+      isSpecial = #{isspecial,jdbcType=INTEGER},
+      inDate = #{indate,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
